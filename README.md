@@ -1,8 +1,14 @@
-# Data Structures & Algorithms Problem Submissions
+# Data Structures & Algorithms
 
-This repository contains my LeetCode and NeetCode 150 problem submissions.
+My LeetCode and NeetCode 150 problem solutions.
 
-![LeetCode Progress](assets/leetcode-progress.svg)
-![NeetCode 150 Progress](assets/neetcode-progress.svg)
+## Progress
 
-See [`Data Structures & Algorithms/`](https://github.com/LlamzonAmazon/neetcode-submissions/tree/main/Data%20Structures%20%26%20Algorithms) for my solutions.
+[![LeetCode Progress](https://github.com/LlamzonAmazon/DSA-Problems/raw/main/assets/leetcode-progress.svg)](https://github.com/LlamzonAmazon/DSA-Problems/blob/main/assets/leetcode-progress.svg)
+
+[![NeetCode Progress](https://github.com/LlamzonAmazon/DSA-Problems/raw/main/assets/neetcode-progress.svg)](https://github.com/LlamzonAmazon/DSA-Problems/blob/main/assets/neetcode-progress.svg)
+
+## Solutions
+
+- [LeetCode](https://github.com/LlamzonAmazon/DSA-Problems/tree/main/LeetCode)
+- [NeetCode 150](https://github.com/LlamzonAmazon/DSA-Problems/tree/main/Data%20Structures%20%26%20Algorithms)
