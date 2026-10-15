@@ -1,0 +1,114 @@
+name: Update DSA Progress
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-dsa-progress
+  cancel-in-progress: false
+
+jobs:
+  update-progress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate progress graphics
+        run: |
+          mkdir -p assets
+
+          python3 <<'PY'
+          from pathlib import Path
+          from html import escape
+
+          def count_problems(root, pattern=None):
+              if not root.exists():
+                  return 0
+
+              count = 0
+              for folder in root.iterdir():
+                  if not folder.is_dir():
+                      continue
+
+                  if pattern:
+                      has_solution = any(
+                          p.is_file() and p.match(pattern)
+                          for p in folder.iterdir()
+                      )
+                  else:
+                      has_solution = any(
+                          p.is_file() for p in folder.rglob("*")
+                      )
+
+                  if has_solution:
+                      count += 1
+
+              return count
+
+          def make_svg(title, solved, total, output):
+              percent = min(solved / total * 100, 100)
+              filled = 660 * percent / 100
+
+              svg = f'''<svg xmlns="http://www.w3.org/2000/svg"
+                width="700" height="130" viewBox="0 0 700 130">
+                <rect width="700" height="130" rx="14" fill="#0d1117"/>
+                <text x="24" y="35" fill="#f0f6fc"
+                  font-family="Arial" font-size="20" font-weight="bold">
+                  {escape(title)}
+                </text>
+                <text x="24" y="66" fill="#c9d1d9"
+                  font-family="Arial" font-size="16">
+                  {solved} / {total} problems solved
+                </text>
+                <rect x="20" y="82" width="660" height="14"
+                  rx="7" fill="#30363d"/>
+                <rect x="20" y="82" width="{filled:.2f}" height="14"
+                  rx="7" fill="#3fb950"/>
+                <text x="680" y="119" text-anchor="end"
+                  fill="#8b949e" font-family="Arial" font-size="13">
+                  {percent:.1f}% complete
+                </text>
+              </svg>'''
+
+              Path(output).write_text(svg)
+              print(f"{title}: {solved}/{total} ({percent:.1f}%)")
+
+          leetcode = count_problems(Path("LeetCode"))
+          neetcode = count_problems(
+              Path("Data Structures & Algorithms"),
+              "submission-*"
+          )
+
+          make_svg(
+              "LeetCode Progress",
+              leetcode,
+              150,
+              "assets/leetcode-progress.svg"
+          )
+
+          make_svg(
+              "NeetCode 150",
+              neetcode,
+              150,
+              "assets/neetcode-progress.svg"
+          )
+          PY
+
+      - name: Commit updated graphics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add assets/leetcode-progress.svg \
+                  assets/neetcode-progress.svg
+
+          git diff --cached --quiet || (
+            git commit -m "Update DSA progress graphics" &&
+            git push
+          )
