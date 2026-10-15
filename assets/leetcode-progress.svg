@@ -7,14 +7,14 @@
       </text>
       <text x="24" y="66" fill="#c9d1d9"
         font-family="Arial" font-size="16">
-        0 / 150 problems solved
+        1 / 150 problems solved
       </text>
       <rect x="20" y="82" width="660" height="14"
         rx="7" fill="#30363d"/>
-      <rect x="20" y="82" width="0.00" height="14"
+      <rect x="20" y="82" width="4.40" height="14"
         rx="7" fill="#3fb950"/>
       <text x="680" y="119" text-anchor="end"
         fill="#8b949e" font-family="Arial" font-size="13">
-        0.0% complete
+        0.7% complete
       </text>
     </svg>
