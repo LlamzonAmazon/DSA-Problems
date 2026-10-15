@@ -1,0 +1,69 @@
+
+name: Update NeetCode Progress
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-progress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate progress graphic
+        run: |
+          mkdir -p assets
+
+          python3 <<'PY'
+          from pathlib import Path
+
+          root = Path("Data Structures & Algorithms")
+          total = 150
+
+          solved = sum(1 for p in root.iterdir() if p.is_dir()) if root.exists() else 0
+          percent = min(solved / total * 100, 100)
+
+          width = 700
+          bar_width = 660
+          filled = bar_width * percent / 100
+
+          svg = f'''<svg xmlns="http://www.w3.org/2000/svg"
+            width="{width}" height="130" viewBox="0 0 {width} 130">
+            <rect width="700" height="130" rx="14" fill="#0d1117"/>
+            <text x="24" y="35" fill="#f0f6fc"
+              font-family="Arial" font-size="20" font-weight="bold">
+              NeetCode 150
+            </text>
+            <text x="24" y="66" fill="#c9d1d9"
+              font-family="Arial" font-size="16">
+              {solved} / {total} problems solved
+            </text>
+            <rect x="20" y="82" width="660" height="14"
+              rx="7" fill="#30363d"/>
+            <rect x="20" y="82" width="{filled:.2f}" height="14"
+              rx="7" fill="#3fb950"/>
+            <text x="680" y="119" text-anchor="end"
+              fill="#8b949e" font-family="Arial" font-size="13">
+              {percent:.1f}% complete
+            </text>
+          </svg>'''
+
+          Path("assets/neetcode-progress.svg").write_text(svg)
+          print(f"Progress: {solved}/{total} ({percent:.1f}%)")
+          PY
+
+      - name: Commit updated graphic
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/neetcode-progress.svg
+          git diff --cached --quiet || (
+            git commit -m "Update NeetCode progress graphic" &&
+            git push
+          )
