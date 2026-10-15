@@ -26,7 +26,15 @@ jobs:
           root = Path("Data Structures & Algorithms")
           total = 150
 
-          solved = sum(1 for p in root.iterdir() if p.is_dir()) if root.exists() else 0
+          solved = (
+              sum(
+                  1 for p in root.iterdir()
+                  if p.is_dir()
+                  and any(p.glob("submission-*"))
+              )
+              if root.exists()
+              else 0
+          )
           percent = min(solved / total * 100, 100)
 
           width = 700
