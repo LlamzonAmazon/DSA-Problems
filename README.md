@@ -1,20 +1,5 @@
-# NeetCode Solutions by Thomas Llamzon
-
-Solutions are organized by topic folder, then problem ID. Each submission is stored as a separate file:
+# NeetCode Submissions - Thomas Llamzon
 
 ![NeetCode 150 Progress](assets/neetcode-progress.svg)
 
-```
-<topic-folder>/
-  <problem-id>/
-    submission-0.<ext>   ← first submission
-    submission-1.<ext>   ← second submission
-    ...
-```
-
-**Example:**
-```
-Data Structures & Algorithms/two-integer-sum/submission-0.py
-Data Structures & Algorithms/binary-search/submission-0.ts
-Python For Beginners/python-hello-world/submission-0.py
-```
+See [`Data Structures & Algorithms/`](https://github.com/LlamzonAmazon/neetcode-submissions/tree/main/Data%20Structures%20%26%20Algorithms) for my solutions.
