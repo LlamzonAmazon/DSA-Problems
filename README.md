@@ -2,6 +2,8 @@
 
 Solutions are organized by topic folder, then problem ID. Each submission is stored as a separate file:
 
+![NeetCode 150 Progress](assets/neetcode-progress.svg)
+
 ```
 <topic-folder>/
   <problem-id>/
