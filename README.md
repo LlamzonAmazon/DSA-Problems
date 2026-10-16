@@ -1,9 +1,5 @@
 # Data Structures & Algorithms
 
-My LeetCode and NeetCode 150 problem solutions.
-
-## Progress
-
 [![DSA Progress](https://github.com/LlamzonAmazon/DSA-Problems/raw/main/assets/dsa-progress.svg)](https://github.com/LlamzonAmazon/DSA-Problems/blob/main/assets/dsa-progress.svg)
 
 ## Solutions
