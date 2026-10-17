@@ -18,6 +18,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - name: Generate progress graphic
         run: |
@@ -96,7 +98,15 @@ jobs:
                   assets/neetcode-progress.svg
           git add assets/dsa-progress.svg
 
-          git diff --cached --quiet || (
-            git commit -m "Update DSA progress graphic" &&
-            git push
-          )
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+
+          git commit -m "Update DSA progress graphic"
+
+          # A newer push can land while this job runs; rebase onto it and retry.
+          for attempt in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
+            sleep $((attempt * 2))
+          done
+          exit 1
