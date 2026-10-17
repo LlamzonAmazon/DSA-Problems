@@ -6,10 +6,10 @@
       <text x="24" y="68" fill="#c9d1d9"
         font-family="Arial" font-size="16">NeetCode 150</text>
       <text x="680" y="68" text-anchor="end" fill="#c9d1d9"
-        font-family="Arial" font-size="16">14 / 150 solved (9.3%)</text>
+        font-family="Arial" font-size="16">15 / 150 solved (10.0%)</text>
       <rect x="20" y="78" width="660" height="14"
         rx="7" fill="#30363d"/>
-      <rect x="20" y="78" width="61.60" height="14"
+      <rect x="20" y="78" width="66.00" height="14"
         rx="7" fill="#3fb950"/>
       <rect x="20" y="112" width="660" height="1" fill="#30363d"/>
       <text x="24" y="145" fill="#c9d1d9"
