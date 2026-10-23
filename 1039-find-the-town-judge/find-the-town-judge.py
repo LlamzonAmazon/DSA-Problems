@@ -18,12 +18,12 @@ class Solution:
         # Eliminate all people who are not trusted by someone
         trusted_by_all = [1] * n 
         for t in range(n):
-            if trusted.get(t, 0) < n-1: # If not trusted by all but themselves
+            if trusted.get(t, 0) != n-1: # If not trusted by all but themselves
                 trusted_by_all[t] = 0
 
         # Find person who has 0 people they trust
         for c in range(n):
-            if trusted_by_all[c] == 1 and trusts.get(c, 0) <= 0:
+            if trusted_by_all[c] == 1 and trusts.get(c, 0) == 0:
                 judge = c+1
 
         return judge
