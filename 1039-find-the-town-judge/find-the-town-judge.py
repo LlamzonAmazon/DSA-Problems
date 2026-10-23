@@ -7,32 +7,23 @@ class Solution:
 
         judge = -1
 
-        # Initialize matrix with 0's in an n•n matrix 
-        trust_matrix = [[0] * n for _ in range(n)] # index = label-1 
-        
-        # Iterate through trust and build matrix
-        for i in range(len(trust)):
-            trustor_label = trust[i][0]-1
-            trustee_label = trust[i][1]-1
+        # 1 represents trust, 0 otherwise
+        trusts, trusted = {}, {}
 
-            trust_matrix[trustor_label][trustee_label] = 1
+        for trustor, trustee in trust:
 
-        # 1 Represents still being a judge candidate, judge is index with value 1
-        trusted = [1] * n 
+            trusts[trustor-1] = 1 + trusts.get(trustor-1, 0)
+            trusted[trustee-1] = 1 + trusted.get(trustee-1, 0)
+    
+        # Eliminate all people who are not trusted by someone
+        trusted_by_all = [1] * n 
+        for t in range(n):
+            if trusted.get(t, 0) < n-1: # If not trusted by all but themselves
+                trusted_by_all[t] = 0
 
-        # Search for row of all 0's and a column of all 1's except for in that column
-        for r in range(n):
-            for c in range(n):
-
-                # Has been trusted by all until now AND is not trusted by person r+1
-                if trusted[c] == 1 and trust_matrix[r][c] == 0 and r != c:
-                    trusted[c] = 0
-
-        print(trusted)
-
-        # Search for person with all 0 trust and is trusted by all
-        for r in range(n):
-            if 1 not in trust_matrix[r] and trusted[r] == 1:
-                judge = r+1
+        # Find person who has 0 people they trust
+        for c in range(n):
+            if trusted_by_all[c] == 1 and trusts.get(c, 0) <= 0:
+                judge = c+1
 
         return judge
