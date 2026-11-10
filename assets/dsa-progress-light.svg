@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="124" viewBox="0 0 760 124" role="img">
+      <style>:root{--fg:#1f2328;--muted:#59636e;--line:#d1d9e0;--track:#818b981f;--fill:#1f883d} text{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;font-size:14px;font-variant-numeric:tabular-nums}</style>
+      <rect x=".5" y=".5" width="759" height="123" fill="none" stroke="var(--line)"/>
+      <text x="24" y="34" fill="var(--fg)" font-weight="600">NeetCode 150</text>
+      <text x="736" y="34" text-anchor="end" fill="var(--muted)">31 / 150 solved · 20.7%</text>
+      <rect x="24" y="48" width="712" height="8" fill="var(--track)"/>
+      <rect x="24" y="48" width="147.15" height="8" fill="var(--fill)"/>
+      <rect x="24" y="76" width="712" height="1" fill="var(--line)"/>
+      <text x="24" y="104" fill="var(--fg)" font-weight="600">LeetCode</text>
+      <text x="736" y="104" text-anchor="end" fill="var(--muted)">1 solved</text>
+    </svg>
